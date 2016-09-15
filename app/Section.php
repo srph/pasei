@@ -28,15 +28,6 @@ class Section extends Model
      * @return Collection
      */
     public function subjects() {
-    	return $this->hasManyThrough(Subject::class, Resource::class);
-    }
-
-    /**
-     * Many-to-many relationship
-     *
-     * @return Collection
-     */
-    public function resources() {
-        return $this->hasMany(Resource::class, 'class_id');
+    	return $this->hasManyThrough(Subject::class, Resource::class, 'class_id', 'id');
     }
 }

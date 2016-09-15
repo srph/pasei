@@ -28,15 +28,24 @@ class User extends Authenticatable
     ];
 
     /**
+     * Belongs-to relationship
+     *
+     * @return Collection
+     */
+    public function type() {
+        return $this->belongsTo(UserType::class, 'user_type_id');
+    }
+
+    /**
      * Many-to-many relationship
      *
      * @return Collection
      */
-    public function classes() {
+    public function sections() {
         // 1: Student, 2: Teacher
-        return $this->user_type->id === 1
-            ? $this->belongsToMany(Section::class, 'class_user')
-            : $this->hasManyThrough(Section::class, Resource::class);
+        return $this->user_type_id === 1
+            ? $this->belongsToMany(Section::class, 'class_user', 'class_id', 'user_id')
+            : $this->hasManyThrough(Section::class, Resource::class, 'class_id');
     }
 
     /**

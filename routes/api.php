@@ -21,5 +21,15 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:api');
 
 Route::get('/test', function() {
-	return response()->json(Section::with('resources.subject', 'resources.teacher')->get());
+	// return response()->json(Section::with('resources.subject', 'resources.teacher')->get());
+	// return response()->json(
+	// 	User::find(1)->classes
+	// );
+	return response()->json(
+		User::with(['sections.students' => function($query) {
+				$query->where('user_type_id', '=', 1);
+			}])
+			->where('user_type_id', '=', 2)
+			->get()
+	);
 });
