@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  font-size: 14px;
+  font-family: San Francisco ,-apple-system, BlinkMacSystemFont, ".SFSNText-Regular", Segoe UI, Ubuntu, Helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+a {
+  color: $color-primary;
+}
+
+.container {
+  width: 998px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@mixin link-no-underscore() {
+  &, &:hover {
+    text-decoration: none;
+  }
+}

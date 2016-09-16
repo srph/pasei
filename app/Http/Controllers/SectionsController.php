@@ -15,7 +15,7 @@ class SectionsController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.sections.index');
     }
 
     /**
@@ -25,7 +25,7 @@ class SectionsController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.create.index');
     }
 
     /**
@@ -47,7 +47,7 @@ class SectionsController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('dashboard.sections.show');
     }
 
     /**
@@ -58,7 +58,7 @@ class SectionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('dashboard.sections.edit');
     }
 
     /**
