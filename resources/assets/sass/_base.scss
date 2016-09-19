@@ -12,6 +12,18 @@ h1, h2, h3, h4, h5, h6, p {
   margin-bottom: 15px;
 }
 
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+h3 {
+  font-size: 32px;
+}
+
 a {
   color: $color-primary;
 }
@@ -22,6 +34,14 @@ a {
   margin-right: auto;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+@mixin clearfix() {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }
 
 @mixin link-no-underscore() {

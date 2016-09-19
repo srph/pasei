@@ -4,10 +4,11 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -15,7 +16,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'email',
+        'password',
+        'first_name',
+        'last_name',
+        'middle_name',
+        'user_type_id',
     ];
 
     /**
@@ -26,6 +32,31 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    /**
+     * MI getter
+     *
+     * @return string
+     */
+    public function getMiddleInitials() {
+        return substr($this->middle_name, 0 , 1);
+    }
+
+    /**
+     * Full name getter
+     *
+     * @return string
+     */
+    public function getFullNameAttribute() {
+        return "{$this->first_name} {$this->middle_initials}. {$this->last_name}";
+    }
 
     /**
      * Belongs-to relationship

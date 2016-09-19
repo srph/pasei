@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
+use App\User;
 
 class StudentsController extends Controller
 {
@@ -15,7 +15,11 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        return view('dashboard.students.index');
+        $users = User::where('user_type_id', 1)
+            ->orderBy('id', 'desc')
+            ->paginate(20);
+
+        return view('dashboard.students.index')->with('users', $users);
     }
 
     /**
@@ -34,9 +38,23 @@ class StudentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreStudentRequest $request)
     {
-        //
+        $inputs = array_merge([
+            'password'      => bcrypt('1234'),
+            'user_type_id'  => 1
+        ], $request->only([
+            'first_name',
+            'last_name',
+            'middle_name',
+            'email'
+        ]));
+
+        (new User($inputs))->save();
+
+        session()->flash('student.store.success', 'Student was successfully enrolled!');
+
+        return redirect()->back();
     }
 
     /**
@@ -45,9 +63,10 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        return view('dashboard.students.show');
+        return view('dashboard.students.show')
+            ->with('user', $user);
     }
 
     /**
@@ -56,9 +75,10 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        return view('dashboard.students.edit');
+        return view('dashboard.students.edit')
+            ->with('user', $user);
     }
 
     /**
@@ -68,9 +88,18 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateStudentRequest $request, User $user)
     {
-        //
+        $inputs = $request->only([
+            'first_name',
+            'last_name',
+            'middle_name',
+            'email'
+        ]);
+
+        $user->fill($inputs)->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -79,7 +108,7 @@ class StudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
         //
     }
