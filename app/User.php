@@ -45,7 +45,7 @@ class User extends Authenticatable
      *
      * @return string
      */
-    public function getMiddleInitials() {
+    public function getMiddleInitialsAttribute() {
         return substr($this->middle_name, 0 , 1);
     }
 
@@ -75,7 +75,7 @@ class User extends Authenticatable
     public function sections() {
         // 1: Student, 2: Teacher
         return $this->user_type_id === 1
-            ? $this->belongsToMany(Section::class, 'class_user', 'class_id', 'user_id')
+            ? $this->belongsToMany(Section::class, 'class_user', 'user_id', 'class_id')
             : $this->hasManyThrough(Section::class, Resource::class, 'class_id');
     }
 

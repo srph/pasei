@@ -36,9 +36,19 @@
         @include('error', ['error' => 'email'])
       </div>
 
-      <button class="btn btn--primary">
-        Enroll Student
-      </button>
+      <div class="u-clearfix">
+        <div class="u-pull-left">
+          <a href="{{ route('students.index') }}" class="btn">
+            Cancel
+          </a>
+        </div>
+
+        <div class="u-pull-right">
+          <button class="btn btn--primary">
+            Enroll Student
+          </button>
+        </div>
+      </div>
     </div>
   </form>
 @stop

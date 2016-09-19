@@ -18,6 +18,15 @@ class Section extends Model
      *
      * @return Collection
      */
+    public function getYearLevelFormattedAttribute() {
+        return ordinal($this->year_level) . ' Year';
+    }
+
+    /**
+     * Many-to-many relationship
+     *
+     * @return Collection
+     */
     public function students() {
     	return $this->belongsToMany(User::class, 'class_user', 'user_id', 'class_id');
     }

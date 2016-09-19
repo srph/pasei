@@ -99,7 +99,7 @@ class StudentsController extends Controller
 
         $user->fill($inputs)->save();
 
-        return redirect()->back();
+        return redirect()->route('students.show', $user->id);
     }
 
     /**

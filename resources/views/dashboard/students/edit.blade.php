@@ -5,7 +5,15 @@
 @stop
 
 @section('content')
-  <h1 class="u-spacer u-text-light">Edit Student Information</h1>
+  <div class="u-spacer u-clearfix">
+    <h1 class="u-pull-left u-text-light">Edit Student Information</h1>
+
+    <div class="u-pull-right">
+      <a href="{{ route('students.show', $user->id) }}" class="btn btn--primary">
+        View Student
+      </a>
+    </div>
+  </div>
 
   <form action="{{ route('students.update', $user->id) }}" method="POST">
     {{ method_field('PUT') }}
@@ -39,9 +47,19 @@
         @include('error', ['error' => 'email'])
       </div>
 
-      <button class="btn btn--primary">
-        Update
-      </button>
+      <div class="u-clearfix">
+        <div class="u-pull-left">
+          <a href="{{ route('students.index') }}" class="btn">
+            Cancel
+          </a>
+        </div>
+
+        <div class="u-pull-right">
+          <button class="btn btn--primary">
+            Update
+          </button>
+        </div>
+      </div>
     </div>
   </form>
 @stop
