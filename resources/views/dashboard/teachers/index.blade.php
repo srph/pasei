@@ -5,8 +5,47 @@
 @stop
 
 @section('content')
-  <div class="u-text-center">
-    <p class="lead">Simplicity is the ultimate sophistication.</p>
-    <h5>Leonardo da Vinci</h5>
+  <div class="u-clearfix u-spacer">
+    <h1 class="u-pull-left u-text-light">Teachers</h1>
+
+    <div class="u-pull-right">
+      <a href="{{ route('teachers.create') }}" class="btn btn--primary">
+        Register New Teacher
+      </a>
+    </div>
   </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th style="width: ">Name</th>
+        <th style="width: 200px;">Assigned</th>
+        <th style="width: 200px;">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @foreach ( $users as $user )
+        <tr>
+          <td>
+            {{ $user->full_name }}
+          </td>
+
+          <td>
+            <i class="fa fa-check u-text-success"></i>
+          </td>
+
+          <td>
+            <a href="{{ route('teachers.show', $user->id) }}" class="btn">
+              View
+            </a>
+
+            <a href="{{ route('teachers.edit', $user->id) }}" class="btn">
+              Edit
+            </a>
+          </td>
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
 @stop

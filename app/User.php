@@ -70,13 +70,19 @@ class User extends Authenticatable
     /**
      * Many-to-many relationship
      *
-     * @return Collection
+     * @return Collection<App\Section>
      */
     public function sections() {
-        // 1: Student, 2: Teacher
-        return $this->user_type_id === 1
-            ? $this->belongsToMany(Section::class, 'class_user', 'user_id', 'class_id')
-            : $this->hasManyThrough(Section::class, Resource::class, 'class_id');
+        return $this->belongsToMany(Section::class, 'class_user', 'user_id', 'class_id');;
+    }
+
+    /**
+     * Has-many relationship
+     *
+     * @return Collection<App\Resource>
+     */ 
+    public function resources() {
+        return $this->hasMany(Resource::class);
     }
 
     /**

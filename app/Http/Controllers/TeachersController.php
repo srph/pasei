@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-use App\Http\Requests;
+use App\User;
+use App\Http\Requests\StoreTeacherRequest;
+use App\Http\Requests\UpdateTeacherRequest;
 
 class TeachersController extends Controller
 {
@@ -15,7 +15,12 @@ class TeachersController extends Controller
      */
     public function index()
     {
-        return view('dashboard.teachers.index');
+        $users = User::where('user_type_id', 2)
+            ->orderBy('id', 'desc')
+            ->paginate(20);
+
+        return view('dashboard.teachers.index')
+            ->with('users', $users);
     }
 
     /**
@@ -34,9 +39,23 @@ class TeachersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreTeacherRequest $request)
     {
-        //
+        $inputs = array_merge([
+            'password'      => bcrypt('1234'),
+            'user_type_id'  => 2
+        ], $request->only([
+            'first_name',
+            'last_name',
+            'middle_name',
+            'email'
+        ]));
+
+        (new User($inputs))->save();
+
+        session()->flash('teachers.store.success', 'Teacher was successfully registered!');
+
+        return redirect()->back();
     }
 
     /**
@@ -45,9 +64,15 @@ class TeachersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user)
     {
-        return view('dashboard.teachers.show');
+        $resources = $user->resources()
+            ->with('subject', 'section')
+            ->get();
+
+        return view('dashboard.teachers.show')
+            ->with('user', $user)
+            ->with('resources', $resources);
     }
 
     /**
@@ -56,9 +81,10 @@ class TeachersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(User $user)
     {
-        return view('dashboard.teachers.edit');
+        return view('dashboard.teachers.edit')
+            ->with('user', $user);
     }
 
     /**
@@ -68,9 +94,20 @@ class TeachersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateTeacherRequest $request, User $user)
     {
-        //
+        $inputs = $request->only([
+            'first_name',
+            'last_name',
+            'middle_name',
+            'email'
+        ]);
+
+        $user->fill($inputs)->save();
+
+        session()->flash('teachers.update.success', 'Teacher was successfully registered!');
+
+        return redirect()->route('teachers.show', $user->id);
     }
 
     /**

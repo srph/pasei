@@ -1,3 +1,17 @@
+@mixin clearfix() {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin link-no-underscore() {
+  &, &:hover {
+    text-decoration: none;
+  }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -33,6 +47,7 @@ h5 {
 }
 
 a {
+  @include link-no-underscore;
   color: $color-primary;
 }
 
@@ -42,18 +57,4 @@ a {
   margin-right: auto;
   padding-left: 10px;
   padding-right: 10px;
-}
-
-@mixin clearfix() {
-  &::after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-}
-
-@mixin link-no-underscore() {
-  &, &:hover {
-    text-decoration: none;
-  }
 }

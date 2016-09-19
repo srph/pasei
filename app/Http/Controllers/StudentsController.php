@@ -52,7 +52,7 @@ class StudentsController extends Controller
 
         (new User($inputs))->save();
 
-        session()->flash('student.store.success', 'Student was successfully enrolled!');
+        session()->flash('students.store.success', 'Student was successfully enrolled!');
 
         return redirect()->back();
     }
@@ -98,6 +98,8 @@ class StudentsController extends Controller
         ]);
 
         $user->fill($inputs)->save();
+
+        session()->flash('students.update.success', 'Teacher was successfully registered!');
 
         return redirect()->route('students.show', $user->id);
     }
