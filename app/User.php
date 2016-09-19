@@ -73,7 +73,7 @@ class User extends Authenticatable
      * @return Collection<App\Section>
      */
     public function sections() {
-        return $this->belongsToMany(Section::class, 'class_user', 'user_id', 'class_id');;
+        return $this->belongsToMany(Section::class, 'class_user', 'user_id', 'class_id');
     }
 
     /**

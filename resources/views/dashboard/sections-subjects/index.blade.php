@@ -18,51 +18,56 @@
   </div>
 
   <div class="tabs u-spacer">
-    <a href="{{ route('classes.show', $section->id) }}" class="tabs__link tabs__link--active">
+    <a href="{{ route('classes.show', $section->id) }}" class="tabs__link">
       Students
     </a>
 
-    <a href="{{ route('classes.subjects.index', $section->id) }}" class="tabs__link">
+    <a href="{{ route('classes.subjects.index', $section->id) }}" class="tabs__link tabs__link--active">
       Subjects
     </a>
   </div>
 
-  @if( !$students->count() )
+  @if( !$resources->count() )
     <div class="u-size-6">
       @include('info', [
-        'message' => 'It looks like this class doesn\'t have any students yet.' .
-        '<br /><a href="' . route('classes.students.attach', $section->id). '" class="pull-note__link">' .
-        'Add a student to this class</a>.'
+        'message' => 'It looks like this class doesn\'t have any subjects yet.' .
+        '<br /><a href="' . route('classes.subjects.attach', $section->id). '" class="pull-note__link">' .
+        'Add a subject to this class</a>.'
       ])
     </div>
   @else
     <div class="u-clearfix u-spacer">
-      <a href="{{ route('classes.students.attach', $section->id) }}" class="u-pull-right btn btn--primary">
-        Add Student
+      <a href="{{ route('classes.subjects.attach', $section->id) }}" class="u-pull-right btn btn--primary">
+        Add Subject
       </a>
     </div>
 
     <table class="table">
       <thead>
         <tr>
-          <th>Name</th>
+          <th>Subject</th>
+          <th>Teacher</th>
           <th style="width: 200px;">Actions</th>
         </tr>
       </thead>
 
       <tbody>
-        @foreach ( $students as $student )
+        @foreach ( $resources as $resource )
           <tr>
             <td>
-              {{ $student->full_name }}
+              <a href="{{ route('subjects.show', $resource->subject->id) }}">
+                {{ $resource->subject->name }}
+              </a>
             </td>
 
             <td>
-              <a href="{{ route('students.show', $student->id) }}" class="btn">
-                View
+              <a href="{{ route('teachers.show', $resource->subject->id) }}">
+                {{ $resource->teacher->full_name }}
               </a>
+            </td>
 
-              <form action="{{ route('classes.destroy', $student->id) }}" method="POST" style="display: inline-block;">
+            <td>
+              <form action="{{ route('classes.subjects.detach', $resource->subject->id) }}" method="POST" style="display: inline-block;">
                 {{ method_field('DELETE') }}
 
                 <button class="btn btn--plain-danger">

@@ -26,6 +26,11 @@
     color: darken($color-primary, 5%);
   }
 
+  &.btn--plain-danger,
+  &.btn--plain-danger:hover {
+    color: $color-danger;
+  }
+
   &.btn--primary {
     @include btn-variant($color-primary);
   }

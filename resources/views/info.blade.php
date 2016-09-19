@@ -4,6 +4,6 @@
   </div>
 
   <div class="pull-note__text">
-    {{ $message }}
+    {!! $message !!}
   </div>
 </div>

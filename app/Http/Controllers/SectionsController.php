@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Section;
+use App\Http\Requests\StoreSectionRequest;
+use App\Http\Requests\UpdateSectionRequest;
 
 class SectionsController extends Controller
 {
@@ -15,7 +17,10 @@ class SectionsController extends Controller
      */
     public function index()
     {
-        return view('dashboard.sections.index');
+        $sections = Section::orderBy('id', 'desc')->paginate(20);
+
+        return view('dashboard.sections.index')
+            ->with('sections', $sections);
     }
 
     /**
@@ -25,7 +30,7 @@ class SectionsController extends Controller
      */
     public function create()
     {
-        return view('dashboard.create.index');
+        return view('dashboard.sections.create');
     }
 
     /**
@@ -34,9 +39,20 @@ class SectionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSectionRequest $request)
     {
-        //
+        $inputs = array_merge([
+            'school_year' => date('Y') . '-' . (date('Y') + 1)
+        ], $request->only([
+            'name',
+            'year_level'
+        ]));
+
+        (new Section())->fill($inputs)->save();
+
+        session()->flash('sections.store.success', 'The section was successfully created!');
+
+        return redirect()->route('classes.index');
     }
 
     /**
@@ -45,9 +61,18 @@ class SectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Section $section)
     {
-        return view('dashboard.sections.show');
+        $resources = $section->resources()
+            ->with('subject')
+            ->get();
+
+        $students = $section->students;
+
+        return view('dashboard.sections.show')
+            ->with('section', $section)
+            ->with('students', $students)
+            ->with('resources', $resources);
     }
 
     /**
@@ -56,9 +81,10 @@ class SectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Section $section)
     {
-        return view('dashboard.sections.edit');
+        return view('dashboard.sections.edit')
+            ->with('section', $section);
     }
 
     /**
@@ -68,9 +94,18 @@ class SectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSectionRequest $request, Section $section)
     {
-        //
+        $inputs = $request->only([
+            'name',
+            'year_level'
+        ]);
+
+        $section->fill($inputs)->save();
+
+        session()->flash('sections.update.success', 'The section was successfully updated!');
+
+        return redirect()->route('classes.show', $section->id);
     }
 
     /**

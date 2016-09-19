@@ -21,6 +21,10 @@ class BladeServiceProvider extends ServiceProvider
 
             return "<?php if(\is_route_active($route)): echo ltrim($class, ' '); endif; ?>";
         }); 
+
+        Blade::directive('selected', function($expression) {
+            return "<?php if($expression): echo 'selected'; endif; ?>";
+        }); 
     }
 
     /**

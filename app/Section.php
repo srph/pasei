@@ -14,6 +14,17 @@ class Section extends Model
     public $table = 'classes';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'year_level',
+        'school_year',
+    ];
+
+    /**
      * Many-to-many relationship
      *
      * @return Collection
@@ -28,7 +39,7 @@ class Section extends Model
      * @return Collection
      */
     public function students() {
-    	return $this->belongsToMany(User::class, 'class_user', 'user_id', 'class_id');
+    	return $this->belongsToMany(User::class, 'class_user', 'class_id', 'user_id');
     }
 
     /**
@@ -38,5 +49,14 @@ class Section extends Model
      */
     public function subjects() {
     	return $this->hasManyThrough(Subject::class, Resource::class, 'class_id', 'id');
+    }
+
+    /**
+     * Many-to-many relationship
+     *
+     * @return Collection
+     */
+    public function resources() {
+        return $this->hasMany(Resource::class, 'class_id', 'id');
     }
 }
