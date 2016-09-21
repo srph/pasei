@@ -55,7 +55,7 @@ class TeachersController extends Controller
 
         session()->flash('teachers.store.success', 'Teacher was successfully registered!');
 
-        return redirect()->back();
+        return redirect()->route('teachers.index');
     }
 
     /**
