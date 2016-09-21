@@ -15,8 +15,7 @@ Auth::routes();
 
 Route::get('logout', [
 	'as' => 'logout',
-	'uses' => 'Auth\LoginController@logout',
-	'middleware' => 'guest'
+	'uses' => 'Auth\LoginController@logout'
 ]);
 
 Route::group(['middleware' => 'auth'], function() {
