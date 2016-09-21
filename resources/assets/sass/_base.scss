@@ -51,6 +51,14 @@ a {
   color: $color-primary;
 }
 
+hr {
+  margin: 0;
+  height: 1px;
+  width: 100%;
+  background: $color-gray;
+  border: 0;
+}
+
 .container {
   width: 998px;
   margin-left: auto;

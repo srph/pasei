@@ -59,6 +59,19 @@ class User extends Authenticatable
     }
 
     /**
+     * Getter for the calculated grade
+     *
+     * @return string
+     */
+    public function getGradeAttribute() {
+        $grade = null == $this->conv_grade
+            ? $this->pace_grade
+            : ($this->pace_grade * 0.9) + ($this->conv_grade * 0.1);
+
+        return number_format($grade, 2);
+    }
+
+    /**
      * Belongs-to relationship
      *
      * @return Collection
@@ -101,5 +114,16 @@ class User extends Authenticatable
      */
     public function subjects() {
         return $this->hasManyThrough(Subject::class, Resource::class);
+    }
+
+    /**
+     * Scope a queryo to get respective grade of a subject
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeGrade($query) {
+        return $query
+            ->select('users.*', 'user_subject.pace_grade', 'user_subject.conv_grade')
+            ->leftJoin('user_subject', 'users.id', '=', 'user_subject.user_id');
     }
 }

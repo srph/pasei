@@ -18,6 +18,10 @@
   color: $color-success;
 }
 
+.u-text-muted {
+  color: $color-gray;
+}
+
 .u-text-light {
   font-weight: 300;
 }
@@ -29,6 +33,10 @@
 
 .u-spacer {
   margin-bottom: 20px;
+}
+
+.u-spacer-large {
+  margin-bottom: 50px;
 }
 
 // Grid Utilities

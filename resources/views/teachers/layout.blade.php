@@ -31,7 +31,7 @@
   </div>
 
   <script src="https://use.fontawesome.com/c808533dc5.js" async></script>
-  <script src="js/app.js"></script>
+  <script src="{{ asset('js/app.js') }}"></script>
   @yield('scripts')
 </body>
 </html>
