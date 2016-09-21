@@ -42,3 +42,21 @@ function ordinal($num) {
     // Everything else is "nth"
     return $num . 'th';
 }
+
+/**
+ * Get the school year of the given year.
+ * Defaults to the current year
+ *
+ * @param integer $start
+ * @return string
+ */
+function school_year($start = null) {
+    if ( null == $start ) {
+        // In the Philippines, school starts by June.
+        $start = date('n') <= 5
+            ? date('Y') - 1
+            : date('Y');
+    }
+
+    return $start . '-' . ($start + 1);
+}

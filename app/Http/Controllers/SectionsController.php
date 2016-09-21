@@ -42,7 +42,7 @@ class SectionsController extends Controller
     public function store(StoreSectionRequest $request)
     {
         $inputs = array_merge([
-            'school_year' => date('Y') . '-' . (date('Y') + 1)
+            'school_year' => school_year()
         ], $request->only([
             'name',
             'year_level'
