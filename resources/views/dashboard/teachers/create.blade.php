@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-  <h1 class="u-spacer u-text-light">Enroll New Teacher</h1>
+  <h1 class="u-spacer u-text-light">Register New Teacher</h1>
 
   <form action="{{ route('teachers.store') }}" method="POST">
     <div class="u-size-5">
