@@ -32,7 +32,7 @@
 
       <div class="main-nav__section">
         <div class="main-nav__item main-nav__item--non-link">
-          Welcome, <strong>Kier</strong>!
+          Welcome, <strong>{{ Auth::user()->full_name }}</strong>!
         </div>
         
         <a href="{{ route('logout') }}" class="main-nav__item">Logout</a>
