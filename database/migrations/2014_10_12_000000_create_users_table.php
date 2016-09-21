@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -25,6 +26,16 @@ class CreateUsersTable extends Migration
             $table->softDeletes();
             $table->timestamps();
         });
+
+        DB::table('users')->insert([
+            'id'            => 1,
+            'email'         => 'admin@gmail.com',
+            'password'      => bcrypt('123'),
+            'first_name'    => 'John',
+            'middle_name'   => 'Cena',
+            'last_name'     => 'Doe',
+            'user_type_id'  => 3,
+        ]);
     }
 
     /**
