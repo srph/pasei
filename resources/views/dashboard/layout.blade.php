@@ -35,7 +35,7 @@
           Welcome, <strong>Kier</strong>!
         </div>
         
-        <a href="#" class="main-nav__item">Logout</a>
+        <a href="{{ route('logout') }}" class="main-nav__item">Logout</a>
       </div>
     </nav>
 

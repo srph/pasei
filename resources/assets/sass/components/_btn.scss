@@ -38,4 +38,9 @@
   &.btn--danger {
     @include btn-variant($color-danger);   
   }
+
+  &.btn--block {
+    display: block;
+    width: 100%;
+  }
 }
