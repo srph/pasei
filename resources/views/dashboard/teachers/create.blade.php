@@ -45,7 +45,7 @@
 
         <div class="u-pull-right">
           <button class="btn btn--primary">
-            New Teacher
+            Register New Teacher
           </button>
         </div>
       </div>
