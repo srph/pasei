@@ -29,6 +29,10 @@ class BladeServiceProvider extends ServiceProvider
         Blade::directive('selected', function($expression) {
             return "<?php if($expression): echo 'selected'; endif; ?>";
         });
+
+        Blade::directive('checked', function($expression) {
+            return "<?php if($expression): echo 'checked'; endif; ?>";
+        });
     }
 
     /**

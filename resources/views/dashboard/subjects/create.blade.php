@@ -15,6 +15,15 @@
         @include('error', ['error' => 'name'])
       </div>
 
+      <div class="form-group">
+        <label>
+          <input id="has_conv" name="has_conv" type="checkbox" value="1" @checked(old('has_conv'))>
+           &nbsp; Conventional
+        </label>
+
+        @include('error', ['error' => 'has_conv'])
+      </div>
+
       <div class="u-clearfix">
         <div class="u-pull-left">
           <a href="{{ route('subjects.index') }}" class="btn">

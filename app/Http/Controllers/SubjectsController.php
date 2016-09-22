@@ -41,6 +41,7 @@ class SubjectsController extends Controller
     {
         $subject = new Subject();
         $subject->name = $request->get('name');
+        $subject->has_conv = $request->get('has_conv');
         $subject->save();
 
         session()->flash('subjects.store.success', 'The subject was successfully created!');
@@ -81,6 +82,7 @@ class SubjectsController extends Controller
     public function update(UpdateSubjectRequest $request, Subject $subject)
     {
         $subject->name = $request->get('name');
+        $subject->has_conv = $request->get('has_conv');
         $subject->save();
 
         session()->flash('subjects.update.success', 'The subject was successfully updated!');
