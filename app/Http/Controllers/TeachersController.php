@@ -42,7 +42,7 @@ class TeachersController extends Controller
     public function store(StoreTeacherRequest $request)
     {
         $inputs = array_merge([
-            'password'      => bcrypt('1234'),
+            'password'      => bcrypt('123'),
             'user_type_id'  => 2
         ], $request->only([
             'first_name',
