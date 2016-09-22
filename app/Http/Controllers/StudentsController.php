@@ -54,7 +54,7 @@ class StudentsController extends Controller
 
         session()->flash('students.store.success', 'Student was successfully enrolled!');
 
-        return redirect()->back();
+        return redirect()->route('students.index');
     }
 
     /**

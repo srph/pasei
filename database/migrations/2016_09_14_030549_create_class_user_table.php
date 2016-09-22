@@ -17,7 +17,6 @@ class CreateClassUserTable extends Migration
             $table->increments('id');
             $table->integer('class_id');
             $table->integer('user_id');
-            $table->float('grade');
             $table->timestamps();
         });
     }
