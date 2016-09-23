@@ -43,8 +43,8 @@
             <div class="form-group">
               <label>&nbsp;</label>
 
-              <p id="status" class="form-placeholder">
-                <span class="label label--danger" @if ( !$grade->isFailing($subject->is_conventional) ) style="display: none"@endif>
+              <p class="form-placeholder">
+                <span id="status" class="label label--danger" @if ( !$grade->isFailing($subject->is_conventional) ) style="opacity: 0"@endif>
                   Failing
                 </span>
               </p>
@@ -53,19 +53,15 @@
         </div>
       @else
         <div class="form-group">
-          <label for="conventional_grade">Conventional Grade</label>
+          <label for="conventional_grade">Grade</label>
           <input name="conventional_grade" id="conventional_grade" type="number" min="0" max="99" placeholder="e.g., 85" class="form-input" value="{{ $grade->conventional_grade }}">
           @include('error', ['error' => 'conventional_grade'])
         </div>
 
         <div class="form-group">
-          <label>&nbsp;</label>
-
-          <p id="status" class="form-placeholder">
-            <span class="label label--danger" @if ( !$grade->isFailing($subject->is_conventional) ) style="display: none"@endif>
-              Failing
-            </span>
-          </p>
+          <span id="status" class="label label--danger" @if ( !$grade->isFailing($subject->is_conventional) ) style="opacity: 0" @endif>
+            Failing
+          </span>
         </div>
       @endif
 
@@ -93,9 +89,9 @@
           $final.html(grade.toFixed(2));
 
           if ( grade < 75 ) {
-            $status.fadeIn();
+            $status.animate({ opacity: 1 });
           } else {
-            $status.fadeOut();
+            $status.animate({ opacity: 0 });
           }
         });
       })(jQuery);
@@ -108,11 +104,13 @@
 
         $('form :input').on('change', function() {
           var grade = parseFloat($conv.val(), 10);
+          console.log(grade);
 
           if ( grade < 75 ) {
-            $status.fadeIn();
+            console.log('in');
+            $status.animate({ opacity: 1   });
           } else {
-            $status.fadeOut();
+            $status.animate({ opacity: 0 });
           }
         });
       })(jQuery);

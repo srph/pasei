@@ -42,7 +42,7 @@ class Grade extends Model
      */
     public function isFailing($conv) {
         return $conv
-            ? $this->final_grade < 75
-            : $this->conventional_grade < 75;
+            ? $this->conventional_grade < 75
+            : $this->final_grade < 75;
     }
 }
