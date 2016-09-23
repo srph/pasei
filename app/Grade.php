@@ -22,7 +22,7 @@ class Grade extends Model
         'user_id',
         'subject_id',
         'pace_grade',
-        'conv_grade',
+        'conventional_grade',
     ];
 
     /**
@@ -31,7 +31,7 @@ class Grade extends Model
      * @return string
      */
     public function getFinalGradeAttribute() {
-        $grade = ($this->pace_grade * 0.9) + ($this->conv_grade * 0.1);
+        $grade = ($this->pace_grade * 0.9) + ($this->conventional_grade * 0.1);
         return number_format($grade, 2);
     }
 
@@ -43,6 +43,6 @@ class Grade extends Model
     public function isFailing($conv) {
         return $conv
             ? $this->final_grade < 75
-            : $this->grade < 75;
+            : $this->conventional_grade < 75;
     }
 }

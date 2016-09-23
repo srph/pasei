@@ -25,7 +25,7 @@ class UpdateSubjectRequest extends FormRequest
     {
         return [
             'name'      => 'required',
-            'has_conv'  => 'boolean'
+            'is_conventional'  => 'boolean'
         ];
     }
 }

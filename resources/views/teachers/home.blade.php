@@ -28,7 +28,7 @@
             <tr>
               <td>{{ $student->full_name }}</td>
               <td>
-                @if ( null == $student->pace_grade ) 
+                @if ( null == $student->conventional_grade ) 
                   <span class="label label--primary">
                     Ungraded
                   </span>

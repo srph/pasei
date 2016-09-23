@@ -18,7 +18,8 @@ class SubjectsTableSeeder extends Seeder
 
             DB::table('subjects')->insert([
                 'id'    => $index + 1,
-                'name'  => str_random(10)
+                'name'  => str_random(10),
+                'is_conventional' => rand(0, 1)
             ]);
         }
     }

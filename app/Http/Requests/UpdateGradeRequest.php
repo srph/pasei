@@ -23,13 +23,13 @@ class UpdateGradeRequest extends FormRequest
      */
     public function rules()
     {
-        if ( $this->route('subject')->has_conv ) {
+        if ( $this->route('subject')->is_conventional ) {
             return [
                 'pace_grade' => 'required|numeric|min:50|max:100',
-                'conv_grade' => 'required|numeric|min:50|max:100',
+                'conventional_grade' => 'required|numeric|min:50|max:100',
             ];            
         }
 
-        return ['pace_grade' => 'required|numeric|min:50|max:100'];
+        return ['conventional_grade' => 'required|numeric|min:50|max:100'];
     }
 }

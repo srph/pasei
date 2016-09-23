@@ -45,10 +45,10 @@ class GradesController extends Controller
         $inputs = array_merge([
             'user_id' => $student->id,
             'subject_id' => $subject->id
-        ], $request->only($subject->has_conv ? [
+        ], $request->only($subject->is_conventional ? [
             'pace_grade',
-            'conv_grade'
-        ] : ['pace_grade']));
+            'conventional_grade'
+        ] : ['conventional_grade']));
 
         Grade::where('subject_id', $subject->id)
             ->where('user_id', $student->id)

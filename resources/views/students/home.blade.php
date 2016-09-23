@@ -27,7 +27,7 @@
             <td>{{ $resource->subject->name }}</td>
             <td>{{ $resource->teacher->full_name }}</td>
             <td>
-                @if ( null == $resource->subject->pace_grade ) 
+                @if ( null == $resource->subject->conventional_grade ) 
                   <span class="label label--primary">
                     Ungraded
                   </span>

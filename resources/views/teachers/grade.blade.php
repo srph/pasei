@@ -18,17 +18,17 @@
     {{ method_field('PUT') }}
 
     <div class="u-size-5">
-      <div class="form-group">
-        <label for="pace_grade">PACE Grade</label>
-        <input name="pace_grade" id="pace_grade" type="number" min="0" max="99" placeholder="e.g., 90" class="form-input" value="{{ $grade->pace_grade }}">
-        @include('error', ['error' => 'pace_grade'])
-      </div>
-
-      @if ( $subject->has_conv )
+      @if ( !$subject->is_conventional )
         <div class="form-group">
-          <label for="conv_grade">Conv Grade</label>
-          <input name="conv_grade" id="conv_grade" type="number" min="0" max="99" placeholder="e.g., 85" class="form-input" value="{{ $grade->conv_grade }}">
-          @include('error', ['error' => 'conv_grade'])
+          <label for="pace_grade">PACE Grade</label>
+          <input name="pace_grade" id="pace_grade" type="number" min="0" max="99" placeholder="e.g., 90" class="form-input" value="{{ $grade->pace_grade }}">
+          @include('error', ['error' => 'pace_grade'])
+        </div>
+
+        <div class="form-group">
+          <label for="conventional_grade">Conventional Grade</label>
+          <input name="conventional_grade" id="conventional_grade" type="number" min="0" max="99" placeholder="e.g., 85" class="form-input" value="{{ $grade->conventional_grade }}">
+          @include('error', ['error' => 'conventional_grade'])
         </div>
 
         <div class="grid">
@@ -44,12 +44,28 @@
               <label>&nbsp;</label>
 
               <p id="status" class="form-placeholder">
-                <span class="label label--danger" @if ( !$grade->isFailing($subject->has_conv) ) style="display: none"@endif>
+                <span class="label label--danger" @if ( !$grade->isFailing($subject->is_conventional) ) style="display: none"@endif>
                   Failing
                 </span>
               </p>
             </div>
           </div>
+        </div>
+      @else
+        <div class="form-group">
+          <label for="conventional_grade">Conventional Grade</label>
+          <input name="conventional_grade" id="conventional_grade" type="number" min="0" max="99" placeholder="e.g., 85" class="form-input" value="{{ $grade->conventional_grade }}">
+          @include('error', ['error' => 'conventional_grade'])
+        </div>
+
+        <div class="form-group">
+          <label>&nbsp;</label>
+
+          <p id="status" class="form-placeholder">
+            <span class="label label--danger" @if ( !$grade->isFailing($subject->is_conventional) ) style="display: none"@endif>
+              Failing
+            </span>
+          </p>
         </div>
       @endif
 
@@ -61,20 +77,37 @@
 @stop
 
 @section('scripts')
-  @if ( $subject->has_conv )
+  @if ( !$subject->is_conventional )
     <script>
       ;(function($) {
         var $pace = $('#pace_grade');
-        var $conv = $('#conv_grade');
+        var $conv = $('#conventional_grade');
         var $final = $('#final');
         var $status = $('#status');
 
         $('form :input').on('change', function() {
-          var pace = parseFloat($pace.val(), 10);
-          var conv = parseFloat($conv.val() || 0, 10);
+          var pace = parseFloat($pace.val() || 0, 10);
+          var conv = parseFloat($conv.val(), 10);
           var grade = ((pace * .9) + (conv * .1));
 
           $final.html(grade.toFixed(2));
+
+          if ( grade < 75 ) {
+            $status.fadeIn();
+          } else {
+            $status.fadeOut();
+          }
+        });
+      })(jQuery);
+    </script>
+  @else
+    <script>
+      ;(function($) {
+        var $conv = $('#conventional_grade');
+        var $status = $('#status');
+
+        $('form :input').on('change', function() {
+          var grade = parseFloat($conv.val(), 10);
 
           if ( grade < 75 ) {
             $status.fadeIn();

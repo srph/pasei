@@ -64,9 +64,9 @@ class User extends Authenticatable
      * @return string
      */
     public function getGradeAttribute() {
-        $grade = null == $this->conv_grade
-            ? $this->pace_grade
-            : ($this->pace_grade * 0.9) + ($this->conv_grade * 0.1);
+        $grade = null == $this->pace_grade
+            ? $this->conventional_grade
+            : ($this->pace_grade * 0.9) + ($this->conventional_grade * 0.1);
 
         return number_format($grade, 2);
     }
@@ -168,7 +168,7 @@ class User extends Authenticatable
      */
     public function scopeGrade($query) {
         return $query
-            ->select('users.*', 'user_subject.pace_grade', 'user_subject.conv_grade')
+            ->select('users.*', 'user_subject.pace_grade', 'user_subject.conventional_grade')
             ->leftJoin('user_subject', 'users.id', '=', 'user_subject.user_id');
     }
 }

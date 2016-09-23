@@ -24,9 +24,9 @@ class Subject extends Model
      * @return string
      */
     public function getIsFailingAttribute() {
-        return $this->has_conv
-            ? $this->grade < 75
-            : $this->pace_grade < 75;
+        return $this->is_conventional
+            ? $this->conventional_grade < 75
+            : $this->grade < 75;
     }
 
     /**
@@ -37,9 +37,9 @@ class Subject extends Model
      * @return string
      */
     public function getGradeAttribute() {
-        $grade = $this->has_conv
-            ? ($this->pace_grade * 0.9) + ($this->conv_grade * 0.1)
-            : $this->pace_grade;
+        $grade = $this->is_conventional
+            ? $this->conventional_grade
+            : ($this->pace_grade * 0.9) + ($this->conventional_grade * 0.1);
 
         return number_format($grade, 2);
     }
@@ -52,7 +52,7 @@ class Subject extends Model
      */
     public function scopeGrade($query) {
         $query
-            ->select('subjects.*', 'user_subject.pace_grade', 'user_subject.conv_grade')
+            ->select('subjects.*', 'user_subject.pace_grade', 'user_subject.conventional_grade')
             ->leftJoin('user_subject', 'subjects.id', '=', 'user_subject.subject_id');
     }
 }

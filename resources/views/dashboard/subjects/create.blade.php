@@ -16,12 +16,14 @@
       </div>
 
       <div class="form-group">
+        <input type="hidden" name="is_conventional" value="0">
+        
         <label>
-          <input id="has_conv" name="has_conv" type="checkbox" value="1" @checked(old('has_conv'))>
+          <input id="is_conventional" name="is_conventional" type="checkbox" value="1" @checked(old('is_conventional', true))>
            &nbsp; Conventional
         </label>
 
-        @include('error', ['error' => 'has_conv'])
+        @include('error', ['error' => 'is_conventional'])
       </div>
 
       <div class="u-clearfix">
