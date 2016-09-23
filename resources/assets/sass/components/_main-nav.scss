@@ -1,8 +1,6 @@
 .main-nav {
-  height: 60px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
   margin-bottom: 50px;
 
   .main-nav__section {
@@ -11,16 +9,23 @@
 
   .main-nav__item {
     @include link-no-underscore;
-    display: block;
+    height: 60px;
+    display: flex;
+    align-items: center;
     color: $color-black;
     padding-left: 10px;
     padding-right: 10px;
+    border-bottom: 2px solid transparent;
     transition: 0.2s color;
   }
 
   .main-nav__item:hover,
   .main-nav__item--active {
     color: $color-primary;
+  }
+
+  .main-nav__item--active {
+    border-bottom-color: $color-primary;
   }
 
   .main-nav__item--non-link:hover {
