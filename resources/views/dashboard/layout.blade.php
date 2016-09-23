@@ -32,7 +32,7 @@
 
       <div class="main-nav__section">
         <div class="main-nav__item main-nav__item--non-link">
-          Hello, <strong>Admin</strong>
+          Hello,&nbsp;<strong>Admin</strong>
         </div>
         
         <a href="{{ route('logout') }}" class="main-nav__item">Logout</a>
