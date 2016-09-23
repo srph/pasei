@@ -61,7 +61,7 @@
             </td>
 
             <td>
-              <a href="{{ route('teachers.show', $resource->subject->id) }}">
+              <a href="{{ route('teachers.show', $resource->teacher->id) }}">
                 {{ $resource->teacher->full_name }}
               </a>
             </td>
