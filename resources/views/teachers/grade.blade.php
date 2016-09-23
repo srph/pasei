@@ -31,9 +31,25 @@
           @include('error', ['error' => 'conv_grade'])
         </div>
 
-        <div class="form-group">
-          <label>Final Grade</label>
-          <p id="final" class="form-placeholder">{{ $grade->final_grade }}</p>
+        <div class="grid">
+          <div class="grid__cell u-size-6">
+            <div class="form-group">
+              <label>Final Grade</label>
+              <p id="final" class="form-placeholder">{{ $grade->final_grade }}</p>
+            </div>
+          </div>
+
+          <div class="grid__cell u-size-6">
+            <div class="form-group">
+              <label>&nbsp;</label>
+
+              <p id="status" class="form-placeholder">
+                <span class="label label--danger" @if ( !$grade->isFailing($subject->has_conv) ) style="display: none"@endif>
+                  Failing
+                </span>
+              </p>
+            </div>
+          </div>
         </div>
       @endif
 
@@ -51,12 +67,20 @@
         var $pace = $('#pace_grade');
         var $conv = $('#conv_grade');
         var $final = $('#final');
+        var $status = $('#status');
 
         $('form :input').on('change', function() {
           var pace = parseFloat($pace.val(), 10);
           var conv = parseFloat($conv.val() || 0, 10);
           var grade = ((pace * .9) + (conv * .1));
+
           $final.html(grade.toFixed(2));
+
+          if ( grade < 75 ) {
+            $status.fadeIn();
+          } else {
+            $status.fadeOut();
+          }
         });
       })(jQuery);
     </script>

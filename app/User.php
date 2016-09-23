@@ -72,6 +72,15 @@ class User extends Authenticatable
     }
 
     /**
+     * A flag to check if the grade is failing
+     *
+     * @return string
+     */
+    public function getIsFailingAttribute() {
+        return $this->grade < 75;
+    }
+
+    /**
      * Belongs-to relationship
      *
      * @return Collection

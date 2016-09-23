@@ -17,7 +17,7 @@
       <table class="table">
         <thead>
           <tr>
-            <th style="width: 700px;">Student</th>
+            <th style="width: 650px;">Student</th>
             <th>Grade</th>
             <th style="width: 150px;"></th>
           </tr>
@@ -34,6 +34,12 @@
                   </span>
                 @else
                   {{ $student->grade }}
+
+                  @if ( $student->is_failing )
+                    <span class="label label--danger" style="margin-left: 20px;">
+                      Failing
+                    </span>
+                  @endif
                 @endif
               </td>
 

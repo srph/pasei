@@ -25,11 +25,11 @@ class UpdateGradeRequest extends FormRequest
     {
         if ( $this->route('subject')->has_conv ) {
             return [
-                'pace_grade' => 'required|numeric|min:75|max:100',
-                'conv_grade' => 'required|numeric|min:75|max:100',
+                'pace_grade' => 'required|numeric|min:50|max:100',
+                'conv_grade' => 'required|numeric|min:50|max:100',
             ];            
         }
 
-        return ['pace_grade' => 'required|numeric|min:75|max:100'];
+        return ['pace_grade' => 'required|numeric|min:50|max:100'];
     }
 }

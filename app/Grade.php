@@ -27,12 +27,22 @@ class Grade extends Model
 
     /**
      * Getter for the calculated grade
-     *
-     * @param boolean $conv Flag if the subject has
+     * 
      * @return string
      */
     public function getFinalGradeAttribute() {
         $grade = ($this->pace_grade * 0.9) + ($this->conv_grade * 0.1);
         return number_format($grade, 2);
+    }
+
+    /**
+     * A flag to check if the grade is failing
+     *
+     * @return string
+     */
+    public function isFailing($conv) {
+        return $conv
+            ? $this->final_grade < 75
+            : $this->grade < 75;
     }
 }
