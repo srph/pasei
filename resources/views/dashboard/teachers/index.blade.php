@@ -32,7 +32,13 @@
           </td>
 
           <td>
-            <i class="fa fa-check u-text-success"></i>
+            @if ( $user->is_assigned )
+              <i class="fa fa-check u-text-success"></i>
+            @else
+              <span class="label label--plain-danger">
+                Unassigned
+              </span>
+            @endif
           </td>
 
           <td>

@@ -92,6 +92,19 @@ class User extends Authenticatable
     }
 
     /**
+     * A flag to check if the teacher is assigned to any class
+     *
+     * @return boolean
+     */
+    public function getIsAssignedAttribute() {
+        return $this->resources()
+            ->whereHas('section', function($query) {
+                $query->where('school_year', school_year());
+            })
+            ->first() != null;
+    }
+
+    /**
      * Get student's last section
      *
      * @return App\Section
