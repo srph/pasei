@@ -47,7 +47,7 @@ class GradesController extends Controller
         $inputs = array_merge([
             'user_id' => $student->id,
             'subject_id' => $subject->id
-        ], $request->only($subject->is_conventional ? [
+        ], $request->only(!$subject->is_conventional ? [
             'pace_grade',
             'conventional_grade'
         ] : ['conventional_grade']));
