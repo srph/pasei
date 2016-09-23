@@ -46,7 +46,7 @@ class SubjectsController extends Controller
 
         session()->flash('subjects.store.success', 'The subject was successfully created!');
 
-        return redirect()->route('subjects.show', $subject->id);
+        return redirect()->route('subjects.index');
     }
 
     /**
@@ -87,7 +87,7 @@ class SubjectsController extends Controller
 
         session()->flash('subjects.update.success', 'The subject was successfully updated!');
 
-        return redirect()->route('subjects.show', $subject->id);
+        return redirect()->route('subjects.index');
     }
 
     /**

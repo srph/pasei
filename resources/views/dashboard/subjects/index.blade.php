@@ -31,10 +31,6 @@
           </td>
 
           <td>
-            <a href="{{ route('subjects.show', $subject->id) }}" class="btn">
-              View
-            </a>
-
             <a href="{{ route('subjects.edit', $subject->id) }}" class="btn">
               Edit
             </a>
