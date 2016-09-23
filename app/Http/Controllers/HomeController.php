@@ -25,7 +25,8 @@ class HomeController extends Controller
                 // We'll use this as a workaround for testing purposes where).
                 ->orderBy('id', 'desc')
                 ->where('school_year', school_year())
-                ->with('resources.subject', 'resources.teacher')
+                ->with(['resources.subject' => function($query) { $query->grade(); }])
+                ->with('resources.teacher')
                 ->first();
 
 			return view('students.home')->with('section', $section);

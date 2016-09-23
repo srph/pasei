@@ -15,9 +15,9 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Subject</th>
+          <th style="width: 350px;">Subject</th>
           <th>Teacher</th>
-          <th>Grade</th>
+          <th style="width: 150px;">Grade</th>
         </tr>
       </thead>
 
@@ -26,7 +26,21 @@
           <tr>
             <td>{{ $resource->subject->name }}</td>
             <td>{{ $resource->teacher->full_name }}</td>
-            <td>98.00</td>
+            <td>
+                @if ( null == $resource->subject->pace_grade ) 
+                  <span class="label label--primary">
+                    Ungraded
+                  </span>
+                @else
+                  {{ $resource->subject->grade }}
+
+                  @if ( $resource->subject->is_failing )
+                    <span class="label label--danger" style="margin-left: 20px;">
+                      Failing
+                    </span>
+                  @endif
+                @endif
+            </td>
           </tr>
         @endforeach
       </tbody>
