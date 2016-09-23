@@ -35,6 +35,12 @@
       ])
     </div>
   @else
+    <div class="u-clearfix u-spacer">
+      <a href="{{ route('parents.create', $user->id) }}" class="u-pull-right btn btn--primary">
+        Add New Parent
+      </a>
+    </div>
+
     <table class="table">
       <thead>
         <tr>
