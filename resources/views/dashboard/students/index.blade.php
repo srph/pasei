@@ -20,7 +20,7 @@
       <tr>
         <th style="width: ">Name</th>
         <th>Year Level</th>
-        <th style="width: 150px;">Enrolled</th>
+        <th style="width: 150px;">Current Class</th>
         <th style="width: 200px;">Actions</th>
       </tr>
     </thead>
@@ -33,11 +33,19 @@
           </td>
 
           <td>
-            1st Year
+            {{ $user->last_section ? $user->last_section->year_level_formatted : '' }}
           </td>
 
           <td>
-            <i class="fa fa-check u-text-success"></i>
+            @if ( $user->current_section )
+              <a href="{{ route('classes.show', $user->current_section->id) }}">
+                {{ $user->current_section->name }}
+              </a>
+            @else
+              <span class="label label--danger">
+                Unenrolled
+              </span>
+            @endif
           </td>
 
           <td>

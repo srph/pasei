@@ -81,6 +81,29 @@ class User extends Authenticatable
     }
 
     /**
+     * Get student's last section
+     *
+     * @return App\Section
+     */
+    public function getLastSectionAttribute() {
+        return $this->sections()
+            ->orderBy('id', 'desc')
+            ->first();
+    }
+
+    /**
+     * Get student's last section
+     *
+     * @return App\Section
+     */
+    public function getCurrentSectionAttribute() {
+        return $this->sections()
+            ->orderBy('id', 'desc')
+            ->where('school_year', school_year())
+            ->first();
+    }
+
+    /**
      * Belongs-to relationship
      *
      * @return Collection
