@@ -21,6 +21,7 @@ Route::get('logout', [
 Route::group(['middleware' => 'auth'], function() {
 	Route::get('/', 'HomeController@index');
 	Route::resource('students', 'StudentsController');
+	Route::resource('students/{student}/parents', 'ParentsController');
 	Route::resource('teachers', 'TeachersController');
 	Route::resource('subjects', 'SubjectsController');
 	Route::resource('classes', 'SectionsController');

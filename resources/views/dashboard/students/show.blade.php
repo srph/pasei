@@ -17,6 +17,16 @@
     </div>
   </div>
 
+  <div class="tabs u-spacer">
+    <a href="{{ route('students.show', $user->id) }}" class="tabs__link tabs__link--active">
+      Classes
+    </a>
+
+    <a href="{{ route('parents.index', $user->id) }}" class="tabs__link">
+      Parents
+    </a>
+  </div>
+
   @if( !$user->sections->count() )
     <div class="u-size-6">
       @include('info', ['message' => 'It looks like this student isn\'t assigned to any class yet.'])

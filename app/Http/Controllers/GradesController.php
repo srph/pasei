@@ -7,6 +7,8 @@ use App\Resource;
 use App\User;
 use App\Grade;
 use App\Http\Requests\UpdateGradeRequest;
+use Mail;
+use App\Mail\FailingGrade;
 
 class GradesController extends Controller
 {
@@ -50,11 +52,22 @@ class GradesController extends Controller
             'conventional_grade'
         ] : ['conventional_grade']));
 
-        Grade::where('subject_id', $subject->id)
+        $grade = Grade::where('subject_id', $subject->id)
             ->where('user_id', $student->id)
             ->firstOrNew([])
-            ->fill($inputs)
-            ->save();
+            ->fill($inputs);
+
+        $grade->save();
+
+        $final = $subject->is_conventional
+            ? $grade->conventional_grade
+            : $grade->final_grade;
+
+        if ( $final < 75 ) {
+            $student->parents->map(function($parent) use($student, $grade, $subject) {
+                Mail::to($parent->email)->send(new FailingGrade($student, $grade, $subject, $parent));
+            });
+        }
 
         return redirect()->to('/');
     }

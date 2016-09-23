@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\User;
 use App\Subject;
 use App\Section;
+use App\StudentParent;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -32,6 +33,7 @@ class RouteServiceProvider extends ServiceProvider
         Route::model('teacher', User::class);
         Route::model('subject', Subject::class);
         Route::model('class', Section::class);
+        Route::model('parent', StudentParent::class);
     }
 
     /**

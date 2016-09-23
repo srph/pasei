@@ -28,6 +28,10 @@ class Grade extends Model
     /**
      * Getter for the calculated grade
      * 
+     * When using this, it's assumed that the subject
+     * is a non-conventional subject. Otherwise, simply use
+     * $this->conventional_grade.
+     *
      * @return string
      */
     public function getFinalGradeAttribute() {

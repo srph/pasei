@@ -5,6 +5,10 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Resource;
+use App\Subject;
+use App\Section;
+use App\StudentParent;
 
 class User extends Authenticatable
 {
@@ -159,6 +163,15 @@ class User extends Authenticatable
      */
     public function subjects() {
         return $this->hasManyThrough(Subject::class, Resource::class);
+    }
+
+    /**
+     * Many-to-many relationship
+     *
+     * @return Collection
+     */
+    public function parents() {
+        return $this->hasMany(StudentParent::class);
     }
 
     /**
