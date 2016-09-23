@@ -35,7 +35,7 @@
 
         <div class="u-pull-right">
           <button class="btn btn--primary">
-            Enroll Student
+            Create Subject
           </button>
         </div>
       </div>
