@@ -67,7 +67,7 @@
             </td>
 
             <td>
-              <form action="{{ route('classes.subjects.detach', $resource->subject->id) }}" method="POST" style="display: inline-block;">
+              <form action="{{ route('classes.subjects.detach', ['class' => $section->id, 'subject' => $resource->subject->id ]) }}" method="POST" style="display: inline-block;">
                 {{ method_field('DELETE') }}
 
                 <button class="btn btn--plain-danger">

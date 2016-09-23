@@ -81,8 +81,19 @@ class SectionSubjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function detach($id)
+    public function detach(Section $section, Subject $subject)
     {
-        //
+        // @REFACTOR
+        // We can actually optimize this by having Resource as the
+        // second route parameters since we already have it (in the list).
+        // However, it seems a bit less semantic.
+        Resource::where('subject_id', $subject->id)
+            ->where('class_id', $section->id)
+            ->firstOrFail()
+            ->delete();
+
+        session()->flash('sections.subjects.detach.success', 'The subject was successfully removed from the class');
+
+        return redirect()->back();
     }
 }

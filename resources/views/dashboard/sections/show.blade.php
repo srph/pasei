@@ -62,7 +62,7 @@
                 View
               </a>
 
-              <form action="{{ route('classes.destroy', $student->id) }}" method="POST" style="display: inline-block;">
+              <form action="{{ route('classes.students.detach', ['class' => $section->id, 'student' => $student->id ]) }}" method="POST" style="display: inline-block;">
                 {{ method_field('DELETE') }}
 
                 <button class="btn btn--plain-danger">

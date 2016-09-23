@@ -43,7 +43,7 @@ class SectionStudentsController extends Controller
     {
         $section->students()->attach($request->get('user_id'));
 
-        session()->flash('sections.students.attach.success', 'The student was successfully added to the section');
+        session()->flash('sections.students.attach.success', 'The student was successfully added to the class');
 
         return redirect()->route('classes.show', $section->id);
     }
@@ -54,8 +54,10 @@ class SectionStudentsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function detach($id)
+    public function detach(Section $section, User $student)
     {
-        //
+        $section->students()->detach($student->id);
+        session()->flash('sections.students.detach.success', 'The student was successfully removed from the class');
+        return redirect()->back();
     }
 }
