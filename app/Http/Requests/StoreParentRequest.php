@@ -24,7 +24,7 @@ class StoreParentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'   => 'required',
+            'name'   => 'required|name',
             'email'  => 'required|email',
         ];
     }

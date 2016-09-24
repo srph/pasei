@@ -24,7 +24,7 @@ class UpdateParentRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'   => 'required',
+            'name'   => 'required|name',
             'email'  => 'required|email',
         ];
     }

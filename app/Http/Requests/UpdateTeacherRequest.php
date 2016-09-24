@@ -26,9 +26,9 @@ class UpdateTeacherRequest extends FormRequest
         $id = $this->route('teacher')->id;
 
         return [
-            'first_name'    => 'required',
-            'middle_name'   => 'required',
-            'last_name'     => 'required',
+            'first_name'    => 'required|name',
+            'middle_name'   => 'required|name',
+            'last_name'     => 'required|name',
             'email'         => 'required|email|unique:users,email,' . $id
         ];
     }
