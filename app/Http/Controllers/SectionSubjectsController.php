@@ -19,7 +19,7 @@ class SectionSubjectsController extends Controller
     {
         $resources = $section->resources()
             ->with('subject', 'teacher')
-            ->get();
+            ->paginate(20);
 
         return view('dashboard.sections-subjects.index')
             ->with('section', $section)

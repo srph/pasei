@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <table class="table">
+  <table class="table u-spacer">
     <thead>
       <tr>
         <th style="width: ">Name</th>
@@ -54,4 +54,6 @@
       @endforeach
     </tbody>
   </table>
+
+  {{ $users->links('pagination') }}
 @stop

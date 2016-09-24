@@ -42,7 +42,7 @@
       </a>
     </div>
 
-    <table class="table">
+    <table class="table u-spacer">
       <thead>
         <tr>
           <th>Name</th>
@@ -74,5 +74,7 @@
         @endforeach
       </tbody>
     </table>
+
+    {{ $students->links('pagination') }}
   @endif
 @stop

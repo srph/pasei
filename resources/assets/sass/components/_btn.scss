@@ -39,6 +39,16 @@
     @include btn-variant($color-danger);   
   }
 
+  &.btn--outlined {
+    border: 1px solid $color-primary;
+  }
+
+  &.btn--disabled {
+    color: $color-gray;
+    border: 1px solid $color-gray;
+    cursor: disabled;
+  }
+
   &.btn--block {
     display: block;
     width: 100%;

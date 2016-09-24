@@ -63,16 +63,11 @@ class SectionsController extends Controller
      */
     public function show(Section $section)
     {
-        $resources = $section->resources()
-            ->with('subject')
-            ->get();
-
-        $students = $section->students;
+        $students = $section->students()->paginate(10);
 
         return view('dashboard.sections.show')
             ->with('section', $section)
-            ->with('students', $students)
-            ->with('resources', $resources);
+            ->with('students', $students);
     }
 
     /**

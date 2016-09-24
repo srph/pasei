@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <table class="table">
+  <table class="table u-spacer">
     <thead>
       <tr>
         <th style="width: 400px;">Class Name</th>
@@ -53,4 +53,6 @@
       @endforeach
     </tbody>
   </table>
+
+  {{ $sections->links('pagination') }}
 @stop

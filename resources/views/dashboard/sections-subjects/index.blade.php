@@ -79,5 +79,7 @@
         @endforeach
       </tbody>
     </table>
+
+    {{ $resources->links('pagination') }}
   @endif
 @stop
