@@ -16,9 +16,11 @@
 
       <div class="main-nav__section">
         <div class="main-nav__item main-nav__item--non-link">
-          Welcome, <strong>{{ Auth::user()->full_name }}</strong>!
+          Welcome,&nbsp;<strong>{{ Auth::user()->full_name }}</strong>!
         </div>
-        
+
+        <a href="{{ route('me.settings') }}" class="main-nav__item @active('me', 'main-nav__item--active')">Account</a>
+
         <a href="{{ route('logout') }}" class="main-nav__item">Logout</a>
       </div>
     </nav>

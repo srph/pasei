@@ -37,4 +37,7 @@ Route::group(['middleware' => 'auth'], function() {
 
 	Route::get('subjects/{subject}/grades/{student}', 'GradesController@edit')->name('grades.edit');
 	Route::put('subjects/{subject}/grades/{student}', 'GradesController@grade')->name('grades.update');
+
+	Route::get('me', 'MeController@settings')->name('me.settings');
+	Route::put('me', 'MeController@update')->name('me.update');
 });
