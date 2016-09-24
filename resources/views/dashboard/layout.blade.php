@@ -34,6 +34,8 @@
         <div class="main-nav__item main-nav__item--non-link">
           Hello,&nbsp;<strong>Admin</strong>
         </div>
+
+        <a href="{{ route('me.settings') }}" class="main-nav__item @active('me', 'main-nav__item--active')">Account</a>
         
         <a href="{{ route('logout') }}" class="main-nav__item">Logout</a>
       </div>

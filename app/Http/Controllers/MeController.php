@@ -22,7 +22,11 @@ class MeController extends Controller
     		return view('teachers.me')->with('user', $user);
     	}
 
-		return view('teachers.me')->with('user', $user);
+        if ( $user->type_id === 2 ) {
+		  return view('teachers.me')->with('user', $user);
+        }
+
+        return view('teachers.me')->with('user', $user);
     }
 
 	/**
