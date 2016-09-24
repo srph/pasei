@@ -95,6 +95,6 @@
       </tbody>
     </table>
 
-    {{ $students->links('pagination') }}
+    {{ $students->appends(['query' => $query])->links('pagination') }}
   @endif
 @stop

@@ -21,7 +21,7 @@ class StudentsController extends Controller
         $users = User::where('user_type_id', 1)
             ->orderBy('id', 'desc')
             ->search($query)
-            ->paginate(20);
+            ->paginate(10);
 
         return view('dashboard.students.index')
             ->with('users', $users)

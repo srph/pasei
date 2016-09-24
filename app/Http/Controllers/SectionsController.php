@@ -20,7 +20,7 @@ class SectionsController extends Controller
 
         $sections = Section::orderBy('id', 'desc')
             ->search($query)
-            ->paginate(20);
+            ->paginate(10);
 
         return view('dashboard.sections.index')
             ->with('sections', $sections)
@@ -71,7 +71,7 @@ class SectionsController extends Controller
 
         $students = $section->students()
             ->search($query)
-            ->paginate(10);
+            ->paginate(20);
 
         return view('dashboard.sections.show')
             ->with('section', $section)

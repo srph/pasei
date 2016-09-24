@@ -20,7 +20,7 @@ class SubjectsController extends Controller
 
         $subjects = Subject::orderBy('id', 'desc')
             ->search($query)
-            ->paginate(20);
+            ->paginate(10);
 
         return view('dashboard.subjects.index')
             ->with('subjects', $subjects)

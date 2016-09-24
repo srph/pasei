@@ -71,5 +71,5 @@
     </tbody>
   </table>
 
-  {{ $users->links('pagination') }}
+  {{ $users->appends(['query' => $query])->links('pagination') }}
 @stop
