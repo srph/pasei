@@ -1,6 +1,8 @@
 # pasei
 Pasei is a school grading system for Pasay High School written [Laravel 5.3](https://laravel.com/docs/5.3).
 
+![preview](preview.png)
+
 ## Requirements
 - PHP `>=5.6` (`PHP 7` works) and [Composer](https://getcomposer.org/)
 - Node.js `>=4.x` / npm `>= 2.x`
