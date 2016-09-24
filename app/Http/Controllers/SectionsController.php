@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Section;
 use App\Http\Requests\StoreSectionRequest;
 use App\Http\Requests\UpdateSectionRequest;
@@ -15,12 +14,17 @@ class SectionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $sections = Section::orderBy('id', 'desc')->paginate(20);
+        $query = $request->get('query');
+
+        $sections = Section::orderBy('id', 'desc')
+            ->search($query)
+            ->paginate(20);
 
         return view('dashboard.sections.index')
-            ->with('sections', $sections);
+            ->with('sections', $sections)
+            ->with('query', $query);
     }
 
     /**

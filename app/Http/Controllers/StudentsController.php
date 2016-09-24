@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\User;
@@ -13,13 +14,18 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->get('query');
+        
         $users = User::where('user_type_id', 1)
             ->orderBy('id', 'desc')
+            ->search($query)
             ->paginate(20);
 
-        return view('dashboard.students.index')->with('users', $users);
+        return view('dashboard.students.index')
+            ->with('users', $users)
+            ->with('query', $query);
     }
 
     /**

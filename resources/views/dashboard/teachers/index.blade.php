@@ -5,13 +5,29 @@
 @stop
 
 @section('content')
-  <div class="u-clearfix u-spacer">
-    <h1 class="u-pull-left u-text-light">Teachers</h1>
+  <div class="menu u-spacer">
+    <h1 class="u-text-light">Teachers</h1>
 
-    <div class="u-pull-right">
-      <a href="{{ route('teachers.create') }}" class="btn btn--primary">
-        Register New Teacher
-      </a>
+    <div class="menu__section">
+      <div class="menu__section-item">
+        <form action="{{ route('teachers.index') }}">
+          <label class="form-input-group">
+            <input type="text" class="form-input-group__input" name="query" value="{{ $query }}" placeholder="Search for a teacher by name (e.g., John)" style="min-width: 350px;">
+
+            <div class="form-input-group__button">
+              <button class="plain-btn">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+      </div>
+
+      <div class="menu__section-item">
+        <a href="{{ route('teachers.create') }}" class="btn btn--primary">
+          Register New Teacher
+        </a>
+      </div>
     </div>
   </div>
 

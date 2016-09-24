@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Subject;
 use App\Http\Requests\StoreSubjectRequest;
 use App\Http\Requests\UpdateSubjectRequest;
@@ -13,12 +14,17 @@ class SubjectsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $subjects = Subject::orderBy('id', 'desc')->paginate(20);
+        $query = $request->get('query');
+
+        $subjects = Subject::orderBy('id', 'desc')
+            ->search($query)
+            ->paginate(20);
 
         return view('dashboard.subjects.index')
-            ->with('subjects', $subjects);
+            ->with('subjects', $subjects)
+            ->with('query', $query);
     }
 
     /**

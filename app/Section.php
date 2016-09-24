@@ -59,4 +59,15 @@ class Section extends Model
     public function resources() {
         return $this->hasMany(Resource::class, 'class_id', 'id');
     }
+
+    /**
+     * Scope a query to search for a particular user conditionally
+     *
+     * @return \Illuminate\Database\Eloquent\Builder 
+     */
+    public function scopeSearch($query, $search) {
+        return $search
+            ? $query->where('name', 'like', "%{$search}%")
+            : $query;
+    }
 }

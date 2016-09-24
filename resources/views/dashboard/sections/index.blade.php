@@ -5,13 +5,29 @@
 @stop
 
 @section('content')
-  <div class="u-clearfix u-spacer">
-    <h1 class="u-pull-left u-text-light">Classes</h1>
+  <div class="menu u-spacer">
+    <h1 class="u-text-light">Classes</h1>
 
-    <div class="u-pull-right">
-      <a href="{{ route('classes.create') }}" class="btn btn--primary">
-        Add New Class
-      </a>
+    <div class="menu__section">
+      <div class="menu__section-item">
+        <form action="{{ route('classes.index') }}">
+          <label class="form-input-group" style="min-width: 350px;">
+            <input type="text" class="form-input-group__input" name="query" value="{{ $query }}" placeholder="Search for a class by name (e.g., Amity)" style="min-width: 350px;">
+
+            <div class="form-input-group__button">
+              <button class="plain-btn">
+                <i class="fa fa-search"></i>
+              </button>
+            </div>
+          </label>
+        </form>
+      </div>
+
+      <div class="menu__section-item">
+        <a href="{{ route('classes.create') }}" class="btn btn--primary">
+          Add New Class
+        </a>
+      </div>
     </div>
   </div>
 

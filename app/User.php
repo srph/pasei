@@ -184,4 +184,15 @@ class User extends Authenticatable
             ->select('users.*', 'user_subject.pace_grade', 'user_subject.conventional_grade')
             ->leftJoin('user_subject', 'users.id', '=', 'user_subject.user_id');
     }
+
+    /**
+     * Scope a query to search for a particular user conditionally
+     *
+     * @return \Illuminate\Database\Eloquent\Builder 
+     */
+    public function scopeSearch($query, $search) {
+        return $search
+            ? $query->where('first_name', 'like', "%{$search}%")
+            : $query;
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\User;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
@@ -13,14 +14,18 @@ class TeachersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $query = $request->get('query');
+
         $users = User::where('user_type_id', 2)
             ->orderBy('id', 'desc')
+            ->search($query)
             ->paginate(20);
 
         return view('dashboard.teachers.index')
-            ->with('users', $users);
+            ->with('users', $users)
+            ->with('query', $query);
     }
 
     /**

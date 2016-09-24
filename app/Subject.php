@@ -55,4 +55,15 @@ class Subject extends Model
             ->select('subjects.*', 'user_subject.pace_grade', 'user_subject.conventional_grade')
             ->leftJoin('user_subject', 'subjects.id', '=', 'user_subject.subject_id');
     }
+
+    /**
+     * Scope a query to search for a particular subject conditionally
+     *
+     * @return \Illuminate\Database\Eloquent\Builder 
+     */
+    public function scopeSearch($query, $search) {
+        return $search
+            ? $query->where('name', 'like', "%{$search}%")
+            : $query;
+    }
 }
