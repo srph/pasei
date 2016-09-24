@@ -65,13 +65,18 @@ class SectionsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Section $section)
+    public function show(Request $request, Section $section)
     {
-        $students = $section->students()->paginate(10);
+        $query = $request->get('query');
+
+        $students = $section->students()
+            ->search($query)
+            ->paginate(10);
 
         return view('dashboard.sections.show')
             ->with('section', $section)
-            ->with('students', $students);
+            ->with('students', $students)
+            ->with('query', $query);
     }
 
     /**

@@ -27,7 +27,7 @@
     </a>
   </div>
 
-  @if( !$students->count() )
+  @if( !$query && !$students->count() )
     <div class="u-size-6">
       @include('info', [
         'message' => 'It looks like this class doesn\'t have any students yet.' .
@@ -36,10 +36,30 @@
       ])
     </div>
   @else
-    <div class="u-clearfix u-spacer">
-      <a href="{{ route('classes.students.attach', $section->id) }}" class="u-pull-right btn btn--primary">
-        Add Student
-      </a>
+    <div class="menu u-spacer">
+      <div></div>
+
+      <div class="menu__section">
+        <div class="menu__section-item">
+          <form action="{{ route('classes.show', $section->id) }}">
+            <label class="form-input-group" style="min-width: 350px;">
+              <input type="text" class="form-input-group__input" name="query" value="{{ $query }}" placeholder="Search for a student by name (e.g., John)">
+
+              <div class="form-input-group__button">
+                <button class="plain-btn">
+                  <i class="fa fa-search"></i>
+                </button>
+              </div>
+            </label>
+          </form>
+        </div>
+
+        <div class="menu__section">
+          <a href="{{ route('classes.students.attach', $section->id) }}" class="u-pull-right btn btn--primary">
+            Add Student
+          </a>
+        </div>
+      </div>
     </div>
 
     <table class="table u-spacer">
