@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>@yield('title') - Pasei Staff Dashboard</title>
+  <title>Login - Pasei Grading System</title>
   <meta charset="utf-8">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
@@ -12,7 +12,7 @@
   <div class="container">
     <div class="u-size-5 u-block-center">
         <h1 class="u-text-center u-text-light">
-            GTBA Login
+          Pasei Login
         </h1>
 
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">

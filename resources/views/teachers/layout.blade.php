@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>@yield('title') - Pasei Dashboard</title>
+  <title>@yield('title') - Pasei Grading System</title>
   <meta charset="utf-8">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
@@ -28,7 +28,7 @@
     @yield('content')
 
     <div class="footer">
-      &copy; 2016 GTBA. All rights reserved.
+      &copy; 2016 Pasei Grading System. All rights reserved.
     </div>
   </div>
 
