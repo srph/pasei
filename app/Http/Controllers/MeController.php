@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class MeController extends Controller
 {
+	/**
+	 * Show the form to change user's account
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
     public function settings() {
     	$user = Auth::user();
 
@@ -20,6 +25,12 @@ class MeController extends Controller
 		return view('teachers.me')->with('user', $user);
     }
 
+	/**
+	 * Show the form to change user's account
+	 *
+	 * @param App\Http\Requests\UpdateAuthRequest $request
+	 * @return \Illuminate\Http\Response
+	 */
     public function update(UpdateAuthRequest $request) {
     	$user = Auth::user();
     	$user->email = $request->get('email');
