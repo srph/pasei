@@ -20,9 +20,20 @@ npm install
 cp .env.example .env
 ```
 
+- **Run database migrations**
+```bash
+artisan migrate
+artisan db:seed # Optional. Leave out to set a clean database.
+```
+
+- **Generate key**
+```bash
+artisan key:generate
+```
+
 - **Setup assets**
 ```bash
-gulp # Build the assets one time
+gulp # Build the assets one time, or
 gulp && gulp watch # If you're actively working
 ```
 ## Notes
