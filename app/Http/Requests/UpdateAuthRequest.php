@@ -24,19 +24,22 @@ class UpdateAuthRequest extends FormRequest
      */
     public function rules()
     {
-        if ( Auth::user()->user_type_id === 3 ) {
+        $user = Auth::user();
+
+        if ( $user->user_type_id === 3 ) {
             return [
-                'email'     => 'required|email',
+                'email'     => 'required|email|unique:users,email,' . $user->id,
                 'first_name'    => 'required|name',
                 'middle_name'   => 'required|name',
                 'last_name'     => 'required|name',
-                'password'  => 'min:6|confirmed'
+                'password'      => 'min:6|confirmed'
             ];
         }
 
         return [
             'email'     => 'required|email',
-            'password'  => 'min:6|confirmed'
+            'password'  => 'min:6|confirmed',
+            'email'     => 'required|email|unique:users,email,' . $user->id
         ];
     }
 }
