@@ -30,10 +30,13 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::model('student', User::class);
-        Route::model('teacher', User::class);
         Route::model('subject', Subject::class);
         Route::model('class', Section::class);
         Route::model('parent', StudentParent::class);
+
+        Route::bind('teacher', function($id) {
+            return User::withTrashed()->findOrFail($id);
+        });
     }
 
     /**

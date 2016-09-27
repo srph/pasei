@@ -18,7 +18,8 @@ class TeachersController extends Controller
     {
         $query = $request->get('query');
 
-        $users = User::where('user_type_id', 2)
+        $users = User::withTrashed()
+            ->where('user_type_id', 2)
             ->orderBy('id', 'desc')
             ->search($query)
             ->paginate(10);
@@ -116,13 +117,44 @@ class TeachersController extends Controller
     }
 
     /**
+     * View the page to remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function remove(User $user)
+    {
+        return view('dashboard.teachers.remove')
+            ->with('user', $user);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        session()->flash('teachers.delete.success', 'Teacher was successfully set as inactive!');
+        
+        return redirect()->back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(User $user)
+    {
+        $user->restore();
+
+        session()->flash('teachers.restore.success', 'Teacher was successfully set as active!');
+        
+        return redirect()->back();
     }
 }

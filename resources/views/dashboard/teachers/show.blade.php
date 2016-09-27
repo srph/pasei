@@ -17,6 +17,16 @@
     </div>
   </div>
 
+  <div class="tabs u-spacer">
+    <a href="{{ route('teachers.show', $user->id) }}" class="tabs__link tabs__link--active">
+      Classes
+    </a>
+
+    <a href="{{ route('teachers.remove', $user->id) }}" class="tabs__link">
+      Removal
+    </a>
+  </div>
+
   @if( !$resources->count() )
     <div class="u-size-6">
       @include('info', ['message' => 'It looks like this teacher isn\'t assigned to any class and subject yet.'])

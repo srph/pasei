@@ -23,6 +23,8 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::resource('students', 'StudentsController');
 	Route::resource('students/{student}/parents', 'ParentsController');
 	Route::resource('teachers', 'TeachersController');
+	Route::get('teachers/{teacher}/remove', 'TeachersController@remove')->name('teachers.remove');
+	Route::put('teachers/{teacher}/restore', 'TeachersController@restore')->name('teachers.restore');
 	Route::resource('subjects', 'SubjectsController');
 	Route::resource('classes', 'SectionsController');
 
