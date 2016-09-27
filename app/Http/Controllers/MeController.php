@@ -43,6 +43,12 @@ class MeController extends Controller
     		$user->password = bcrypt($request->password);
     	}
 
+        if ( $user->user_type_id === 3 ) {
+            $user->first_name = $request->get('first_name');
+            $user->middle_name = $request->get('middle_name');
+            $user->last_name = $request->get('last_name');
+        }
+
     	$user->save();
 
     	return redirect()->back();

@@ -20,6 +20,24 @@
       </div>
 
       <div class="form-group">
+        <label for="first_name">First Name</label>
+        <input name="first_name" id="text" type="first_name" placeholder="John" class="form-input" value="{{ $user->first_name }}">
+        @include('error', ['error' => 'first_name'])
+      </div>
+
+      <div class="form-group">
+        <label for="middle_name">Middle Name</label>
+        <input name="middle_name" id="text" type="middle_name" placeholder="Doe" class="form-input" value="{{ $user->middle_name }}">
+        @include('error', ['error' => 'middle_name'])
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Last Name</label>
+        <input name="last_name" id="text" type="last_name" placeholder="Santos" class="form-input" value="{{ $user->last_name }}">
+        @include('error', ['error' => 'last_name'])
+      </div>
+
+      <div class="form-group">
         <label for="password">Password</label>
         <input name="password" id="password" type="password" placeholder="*****" class="form-input">
         @include('error', ['error' => 'password'])
