@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Section;
+use App\Grade;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -46,6 +47,20 @@ class HomeController extends Controller
                 ->with('resources', $resources);
     	}
 
-        return view('dashboard.home');
+        $grades = Grade::passing()
+            ->get()
+            ->groupBy('YEAR(created_at)')
+            ->mapWithKeys(function($grades, $year) {
+                return numeric_string_key_array($year, $grades->count());
+            });
+
+        $transformed = collect(\school_year_range(5))
+            ->mapWithKeys(function($year) {
+                return numeric_string_key_array($year, 0);
+            })
+            ->merge($grades)
+            ->toJson();
+
+        return view('dashboard.home')->with('grades', $transformed);
     }
 }

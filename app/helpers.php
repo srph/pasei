@@ -52,11 +52,49 @@ function ordinal($num) {
  */
 function school_year($start = null) {
     if ( null == $start ) {
-        // In the Philippines, school starts by June.
-        $start = date('n') <= 5
-            ? date('Y') - 1
-            : date('Y');
+        $start = starting_school_year();
     }
 
     return $start . '-' . ($start + 1);
+}
+
+/**
+ * Get the school year of the current year.
+ *
+ * @param array
+ * @return string
+ */
+function starting_school_year() {
+    // In the Philippines, school starts by June.
+    return date('n') <= 5
+        ? date('Y') - 1
+        : date('Y');
+}
+
+/**
+ * Get previous and next years startin
+ * from the current school year
+ *
+ * @param array $range
+ * @return array
+ */
+function school_year_range($range = 1) {
+    $start = starting_school_year();
+    return range($start - $range, $start + $range);
+}
+
+/**
+ * Make an array with a numeric key
+ * (language limitation)
+ *
+ * @see http://stackoverflow.com/q/4100488/2698227
+ *
+ * @param number $key
+ * @param mixed $value
+ * @return array
+ */
+function numeric_string_key_array($key, $value) {
+    $tmp = new \stdClass;
+    $tmp->{"$key"} = $value;
+    return (array) $tmp;
 }

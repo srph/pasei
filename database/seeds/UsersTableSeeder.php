@@ -25,7 +25,8 @@ class UsersTableSeeder extends Seeder
             	'first_name'	=> $index === 0 ? 'John' : str_random(10),
             	'middle_name'	=> $index === 0 ? 'Xavier' : str_random(10),
             	'last_name'		=> $index === 0 ? 'Doe' : str_random(10),
-                'user_type_id'  => $index === 0 ? 3: rand(1, 3)
+                'user_type_id'  => $index === 0 ? 3: rand(1, 3),
+                'created_at'    => date('Y-m-d')
             ]);
         }
     }

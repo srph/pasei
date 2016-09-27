@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Grade extends Model
 {
@@ -48,5 +49,23 @@ class Grade extends Model
         return $conv
             ? $this->conventional_grade < 75
             : $this->final_grade < 75;
+    }
+
+    /**
+     * Scope for getting failing grades
+     *
+     * We're supposed to, but not accurately querying 
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePassing($query) {
+        $year = starting_school_year();
+        $column = DB::raw('YEAR(created_at)');
+
+        return $query
+            ->select($column, 'user_id')
+            ->whereBetween($column, [$year - 1, $year + 1])
+            ->where('conventional_grade', '>=', 75)
+            ->distinct();
     }
 }

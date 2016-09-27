@@ -15,5 +15,9 @@
     "vue": "^1.0.26",
     "vue-resource": "^0.9.3",
     "webpack": "^2.1.0-beta.22"
+  },
+  "dependencies": {
+    "d3-bar": "^1.8.0",
+    "d3-tipy": "^1.2.3"
   }
 }

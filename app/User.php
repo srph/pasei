@@ -175,7 +175,7 @@ class User extends Authenticatable
     }
 
     /**
-     * Scope a queryo to get respective grade of a subject
+     * Scope a query to get respective grade of a subject
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -183,6 +183,24 @@ class User extends Authenticatable
         return $query
             ->select('users.*', 'user_subject.pace_grade', 'user_subject.conventional_grade')
             ->leftJoin('user_subject', 'users.id', '=', 'user_subject.user_id');
+    }
+
+    /**
+     * Scope to query a student user
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeStudent($query) {
+        return $query->where('user_type_id', 1);
+    }
+
+    /**
+     * Scope to query a teacher user
+     *
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeTeacher($query) {
+        return $query->where('user_type_id', 2);
     }
 
     /**
