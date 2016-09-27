@@ -18,15 +18,15 @@ class MeController extends Controller
     public function settings() {
     	$user = Auth::user();
 
-    	if ( $user->type_id === 1 ) {
-    		return view('teachers.me')->with('user', $user);
+    	if ( $user->user_type_id === 1 ) {
+    		return view('students.me')->with('user', $user);
     	}
 
-        if ( $user->type_id === 2 ) {
+        if ( $user->user_type_id === 2 ) {
 		  return view('teachers.me')->with('user', $user);
         }
 
-        return view('teachers.me')->with('user', $user);
+        return view('dashboard.me')->with('user', $user);
     }
 
 	/**
