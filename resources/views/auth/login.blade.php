@@ -18,7 +18,7 @@
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="your@email.com" class="form-input" value="{{ old('email') }}">
+            <input type="email" id="email" name="email" placeholder="your@email.com" class="form-input" value="{{ old('email') }}" autofocus>
             @include('error', ['error' => 'email'])
           </div>
 
