@@ -37,6 +37,9 @@ Route::group(['middleware' => 'auth'], function() {
 	Route::post('classes/{class}/students/attach', 'SectionStudentsController@store')->name('classes.students.store');
 	Route::delete('classes/{class}/students/{student}', 'SectionStudentsController@detach')->name('classes.students.detach');
 
+	Route::get('classes/{class}/reports', 'SectionReportsController@reports')->name('classes.reports.index');
+	Route::get('classes/{class}/generate', 'SectionReportsController@generate')->name('classes.reports.generate');	
+
 	Route::get('subjects/{subject}/grades/{student}', 'GradesController@edit')->name('grades.edit');
 	Route::put('subjects/{subject}/grades/{student}', 'GradesController@grade')->name('grades.update');
 

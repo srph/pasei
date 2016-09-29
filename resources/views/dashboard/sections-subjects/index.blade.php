@@ -25,6 +25,10 @@
     <a href="{{ route('classes.subjects.index', $section->id) }}" class="tabs__link tabs__link--active">
       Subjects
     </a>
+
+    <a href="{{ route('classes.reports.index', $section->id) }}" class="tabs__link">
+      Reports
+    </a>
   </div>
 
   @if( !$resources->count() )

@@ -98,3 +98,16 @@ function numeric_string_key_array($key, $value) {
     $tmp->{"$key"} = $value;
     return (array) $tmp;
 }
+
+/**
+ * Generate full name
+ *
+ * @param string $first
+ * @param string $middle
+ * @param string $last
+ * @return string
+ */
+function fullname($first, $middle, $last) {
+    $initials = substr($middle, 0 , 1) . '.';
+    return "{$first} {$initials} {$last}";
+}

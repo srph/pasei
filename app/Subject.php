@@ -48,12 +48,21 @@ class Subject extends Model
      * Scope a queryo to get respective grade of the student
      * to this subject.
      *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param boolean $withUser
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeGrade($query) {
-        $query
+    public function scopeGrade($query, $withUser = false) {
+        $query = $query
             ->select('subjects.*', 'user_subject.pace_grade', 'user_subject.conventional_grade')
             ->leftJoin('user_subject', 'subjects.id', '=', 'user_subject.subject_id');
+
+        if ( !$withUser ) {
+            return $query;
+        }
+
+        return $query->addSelect('users.first_name', 'users.last_name', 'users.middle_name')
+            ->join('users', 'user_subject.user_id', '=', 'users.id');
     }
 
     /**
