@@ -28,35 +28,37 @@ class SectionReportsController extends Controller
      */
     public function generate(Request $request, Section $section)
     {
-       $subjects = $section->resources()
+        // We could split this into multiple queries, but #yolo.
+        $subjects = $section->resources()
             ->select(
-                'users.first_name',
-                'users.middle_name',
-                'users.last_name',
-                'user_subject.conventional_grade',
+                'subjects.id as subject_id',
+                'subjects.name as subject_name',
+                'subjects.is_conventional as subject_is_conventional',
+                'users.*',
                 'user_subject.pace_grade',
-                'resources.subject_id',
-                'resources.user_id',
-                'subjects.name',
-                'subjects.is_conventional'
+                'user_subject.conventional_grade'
             )
-            ->leftJoin('subjects', 'resources.subject_id', '=', 'subjects.id')
-            ->crossJoin('users')
-            ->leftJoin('user_subject', 'resources.subject_id', '=', 'user_subject.subject_id')
+            ->join('subjects', 'resources.subject_id', '=', 'subjects.id')
+            ->leftJoin('class_user', 'resources.class_id', '=', 'class_user.class_id')
+            ->join('users', 'class_user.user_id', '=', 'users.id')
+            ->leftJoin('user_subject', function($query) {
+                $query->on('subjects.id', '=', 'user_subject.subject_id')
+                    ->on('users.id', '=', 'user_subject.user_id');;
+            })
             ->get()
-            ->groupBy('name');
+            ->groupBy('subject_name');
 
-        $filename = "class_{$section->name}_reports";
+        $filename = "class_{$section->name}_{$section->school_year}_reports";
 
         $excel = Excel::create($filename, function($excel) use($subjects) {
-            $subjects->flatMap(function($grades, $key) use($excel) {
-                $excel->sheet($key, function($sheet) use($grades) {
-                    $sheet->fromArray($grades->map(function($grade) {
-                        $fullname = fullname($grade->first_name, $grade->middle_name, $grade->last_name);
+            $subjects->flatMap(function($students, $name) use($excel) {
+                $excel->sheet($name, function($sheet) use($students) {
+                    $sheet->fromArray($students->map(function($student) {
+                        $fullname = fullname($student->first_name, $student->middle_name, $student->last_name);
 
-                        $grade = $grade->is_conventional
-                            ? $grade->convential_grade
-                            : ($grade->pace_grade * 0.9) + ($grade->conventional_grade * 0.1);
+                        $grade = $student->subject_is_conventional
+                            ? $student->conventional_grade
+                            : ($student->pace_grade * 0.9) + ($student->conventional_grade * 0.1);
 
                         return [
                             'Student' => $fullname,
