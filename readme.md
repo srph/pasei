@@ -36,8 +36,3 @@ artisan key:generate
 gulp # Build the assets one time, or
 gulp && gulp watch # If you're actively working
 ```
-## Notes
-- If you check the commit history, this was written for presentation purposes.
-- A lot of parts need some optimization.
-- A lot of parts also need authorization.
-- Schema design could be improved, but with resource limitations, nuh-uh.
